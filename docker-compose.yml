@@ -1,0 +1,64 @@
+version: '3.8'
+
+services:
+  # MySQL 8.0 데이터베이스
+  mysql:
+    image: mysql:8.0
+    container_name: bank-simulator-mysql
+    environment:
+      MYSQL_ROOT_PASSWORD: rootpassword
+      MYSQL_DATABASE: bank_simulator
+      MYSQL_USER: bankuser
+      MYSQL_PASSWORD: bankpass
+    ports:
+      - "3306:3306"
+    volumes:
+      - mysql_data:/var/lib/mysql    # 데이터 영속성 유지
+    command: --character-set-server=utf8mb4 --collation-server=utf8mb4_unicode_ci
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost", "-u", "bankuser", "-pbankpass"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    networks:
+      - bank-network
+
+  # Spring Boot 백엔드 (MySQL 준비 후 시작)
+  backend:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    container_name: bank-simulator-backend
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:mysql://mysql:3306/bank_simulator?useSSL=false&serverTimezone=Asia/Seoul&characterEncoding=UTF-8&allowPublicKeyRetrieval=true
+      SPRING_DATASOURCE_USERNAME: bankuser
+      SPRING_DATASOURCE_PASSWORD: bankpass
+      JWT_SECRET: bank-simulator-secret-key-must-be-at-least-256-bits-long-for-hs256-algorithm
+      JWT_EXPIRATION: 86400000
+    ports:
+      - "8080:8080"
+    depends_on:
+      mysql:
+        condition: service_healthy    # MySQL 헬스체크 통과 후 백엔드 시작
+    networks:
+      - bank-network
+
+  # React 프론트엔드 (nginx로 서빙)
+  frontend:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+    container_name: bank-simulator-frontend
+    ports:
+      - "3000:3000"
+    depends_on:
+      - backend
+    networks:
+      - bank-network
+
+volumes:
+  mysql_data:    # MySQL 데이터 볼륨 (컨테이너 재시작 시에도 데이터 유지)
+
+networks:
+  bank-network:
+    driver: bridge

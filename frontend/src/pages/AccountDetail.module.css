@@ -1,0 +1,207 @@
+/* 계좌 상세 페이지 스타일 */
+
+.page {
+  min-height: 100vh;
+  background: #f5f5f5;
+}
+
+.header {
+  background: #1976d2;
+  color: white;
+  padding: 0 24px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+}
+
+.headerInner {
+  max-width: 900px;
+  margin: 0 auto;
+  height: 64px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.back {
+  color: white;
+  text-decoration: none;
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.back:hover {
+  text-decoration: underline;
+}
+
+.brand {
+  font-size: 18px;
+  font-weight: 700;
+}
+
+.main {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.loading, .error {
+  text-align: center;
+  padding: 60px;
+  font-size: 16px;
+  color: #888;
+}
+
+.error {
+  color: #c62828;
+}
+
+/* 계좌 카드 */
+.accountCard {
+  background: linear-gradient(135deg, #1976d2, #0d47a1);
+  color: white;
+  border-radius: 16px;
+  padding: 32px;
+  box-shadow: 0 8px 24px rgba(25, 118, 210, 0.3);
+}
+
+.accountNumber {
+  font-size: 16px;
+  font-family: monospace;
+  opacity: 0.85;
+  margin-bottom: 16px;
+  letter-spacing: 1px;
+}
+
+.balanceLabel {
+  font-size: 13px;
+  opacity: 0.8;
+  margin-bottom: 4px;
+}
+
+.balance {
+  font-size: 36px;
+  font-weight: 700;
+  margin-bottom: 12px;
+}
+
+.openDate {
+  font-size: 13px;
+  opacity: 0.7;
+  margin-bottom: 20px;
+}
+
+.transferBtn {
+  display: inline-block;
+  background: rgba(255,255,255,0.2);
+  color: white;
+  text-decoration: none;
+  padding: 10px 20px;
+  border-radius: 8px;
+  font-size: 14px;
+  font-weight: 600;
+  transition: background 0.2s;
+}
+
+.transferBtn:hover {
+  background: rgba(255,255,255,0.3);
+}
+
+/* 거래 내역 섹션 */
+.section {
+  background: white;
+  border-radius: 12px;
+  padding: 24px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+}
+
+.sectionTitle {
+  font-size: 18px;
+  font-weight: 700;
+  color: #222;
+  margin-bottom: 20px;
+}
+
+.empty {
+  text-align: center;
+  padding: 40px;
+  color: #888;
+}
+
+.txList {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+}
+
+.txItem {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  padding: 16px 0;
+  border-bottom: 1px solid #f0f0f0;
+  gap: 12px;
+}
+
+.txItem:last-child {
+  border-bottom: none;
+}
+
+.txLeft {
+  flex: 1;
+}
+
+.txType {
+  display: inline-block;
+  padding: 3px 10px;
+  border-radius: 12px;
+  font-size: 12px;
+  font-weight: 700;
+  margin-bottom: 6px;
+}
+
+.credit {
+  background: #e8f5e9;
+  color: #2e7d32;
+}
+
+.debit {
+  background: #ffebee;
+  color: #c62828;
+}
+
+.txDesc {
+  font-size: 14px;
+  color: #333;
+  margin-bottom: 4px;
+}
+
+.txCounterpart {
+  font-size: 12px;
+  color: #888;
+  margin-bottom: 4px;
+  font-family: monospace;
+}
+
+.txDate {
+  font-size: 12px;
+  color: #aaa;
+}
+
+.txRight {
+  text-align: right;
+  flex-shrink: 0;
+}
+
+.txAmount {
+  font-size: 16px;
+  font-weight: 700;
+  margin-bottom: 4px;
+}
+
+.txBalance {
+  font-size: 12px;
+  color: #888;
+}
